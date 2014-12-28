@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <p>Esta é a view index do site !!</p>
+    <h1><?php echo $nome ?></h1>
+    <h1><?php echo $idade ?></h1>
+    <h1><?php echo $email?></h1>
+    <h1><?php echo $empresa?></h1>
+    <h1><?php echo $cidade?></h1>
+    <?php foreach($funcionarios as $funcionario):?>
+        <p><?php echo $funcionario['nome']?></p>
+    <?php endforeach?>
+
+</body>
+</html>
