@@ -19,8 +19,6 @@ abstract class Model {
      */
     protected $_table;
 
-    protected $bootstrap;
-
     /**
      * Metodo construct para coneccao com banco de dados
      */
