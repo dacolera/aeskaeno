@@ -95,5 +95,6 @@ abstract class Model {
     {
         if(!is_array($dados))
             die("Dados para insercao e edicao devem ser do tipo array");
+
     }
 }

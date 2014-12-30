@@ -6,24 +6,8 @@
  * Time: 19:18
  */
 
- abstract class Controller {
+ abstract class Controller extends Aeskaeno {
 
-     public $bootstrap;
-
-     public function __construct()
-     {
-         $this->bootstrap = new Aeskaeno();
-     }
-
-     public function getParams($param = null,$return = null)
-     {
-         return $this->bootstrap->getParams($param,$return);
-     }
-
-     public function postParams($param = null,$return = null)
-     {
-         return $this->bootstrap->postParams($param,$return);
-     }
 
      public function view($view,Array $dados = array())
      {

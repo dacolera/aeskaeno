@@ -11,23 +11,27 @@ class Aeskaeno {
     /**
      * @var nome do controlador
      */
-    private $_controller;
+    protected $_controller;
     /**
      * @var nome da action
      */
-    private $_action;
+    protected $_action;
     /**
      * @var url http request
      */
-    private $_url;
+    protected $_url;
     /**
      * @var array com as variaveis de requisicao
      */
-    private $_explode = array();
+    protected $_explode = array();
     /**
      * @var array com os parametros de requisicao
      */
-    private $parameters = array();
+    public $getParameters = array();
+
+    public $postParameters = array();
+
+    public $parameters = array();
 
     /**
      * metodo construtor
@@ -38,6 +42,8 @@ class Aeskaeno {
         $this->setExplode();
         $this->setController();
         $this->setAction();
+        $this->setGetParams();
+        //$this->setPostParams();
     }
 
     /**
@@ -47,7 +53,6 @@ class Aeskaeno {
     {
         require_once('../app/controller/'. $this->_controller .'Controller.php');
         $controler = new $this->_controller();
-
         $controler->{$this->_action}();
     }
 
@@ -74,12 +79,15 @@ class Aeskaeno {
      * Metodo que gera o array de parametros get da requisicao
      * a partir do nome da acao extrai parametros como param/value
      */
-    public function getParams($param = null,$return = null)
+    public function setGetParams()
     {
         $last = array_search(end($this->_explode), $this->_explode);
         unset($this->_explode[0], $this->_explode[1], $this->_explode[2], $this->_explode[$last]);
-
         $this->paramFilter($this->_explode);
+    }
+
+    public function getParams($param = null,$return = null)
+    {
         return $this->retornoFilter($param,$return);
     }
 
@@ -89,10 +97,9 @@ class Aeskaeno {
      * @return array|null
      * Metodo que retorna os parametros do post da requisicao
      */
-    public function postParams($param = null,$return = null)
+    public function setPostParams()
     {
         $this->paramFilter($_POST);
-        return  $this->retornoFilter($param,$return);
     }
 
     /**
@@ -126,11 +133,10 @@ class Aeskaeno {
      * @param array $source
      * Metodo interno que auxilia a extracao de chave valor para requests get e post
      */
-    private function paramFilter(Array $source)
+    protected function paramFilter(Array $source)
     {
         if(!empty($source)) {
-            if(is_numeric(array_keys($source)))
-            {
+            if (is_numeric(array_keys($source))) {
                 foreach ($source as $chave => $valor) {
                     if ($chave % 2 != 0)
                         $keys[] = $valor;
@@ -138,11 +144,12 @@ class Aeskaeno {
                         $values[] = $valor;
                 }
                 if (count($keys) == count($values))
-                    $this->parameters = array_combine($keys, $values);
-            }
-            else
-                $this->parameters = $source;
+                    $this->getParameters = array_combine($keys, $values);
+            } else
+                $this->postParameters = $source;
 
+            $this->parameters = array_merge($this->getParameters,$this->postParameters);
+            $this->getParameters = $this->postParameters = array();
         }
     }
 
@@ -152,7 +159,7 @@ class Aeskaeno {
      * @return array|null
      * Metodo auxiliar que modifica o retorno dos parametros para requests get e post
      */
-    private function retornoFilter($input = null,$return = null)
+    protected function retornoFilter($input = null,$return = null)
     {
         if($input === null)
             return $this->parameters;

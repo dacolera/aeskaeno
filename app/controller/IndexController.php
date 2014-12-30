@@ -44,7 +44,7 @@ class Index extends Controller{
 
     public function cadastrar()
     {
-        if($this->bootstrap->isPost()){
+        if($this->isPost()){
             //die('formulario submetido '.implode('  ',$this->postParams()));
             $insercao = new Funcionarios();
             $insercao->insert($this->postParams());

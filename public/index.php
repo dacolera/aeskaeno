@@ -27,6 +27,7 @@
     }
 
     $bootstrap = new Aeskaeno();
-
+    print "<pre>";
+    print_r($bootstrap->parameters); exit;
     $bootstrap->start();
 
