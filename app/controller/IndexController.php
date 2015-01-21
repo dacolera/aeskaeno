@@ -32,7 +32,7 @@ class Index extends Controller{
             'funcionarios' => $lista
         );
 
-        $this->view('index',$dados);
+        $this->view(null,$dados);
 
     }
 
@@ -45,16 +45,33 @@ class Index extends Controller{
     public function cadastrar()
     {
         if($this->isPost()){
-            //die('formulario submetido '.implode('  ',$this->postParams()));
-            $insercao = new Funcionarios();
-            $insercao->insert($this->postParams());
+            $func = new Funcionarios();
+            $cargo = new Cargo();
+            $sal = new Salario();
 
-            if($insercao)
-                die('cadastrado com sucesso');
-            die('Erro ao inserir');
+            // gravando o funcionario no banco
+            $id = $func->insert(array('nome' => $this->getParams('nome')));
+            if($id)
+            {
+                $cargo->insert(
+                    array(
+                        'cargo' => $this->getParams('cargo'),
+                        'func_id' => $id
+                    )
+                );
+
+                $sal->insert(
+                    array(
+                        'salario' => $this->getParams('salario'),
+                        'func_id' => $id
+                    )
+                );
+
+                $this->listar();
+            }
         }
-        $this->view('cadastrar');
-
+        else
+            $this->view('cadastrar');
     }
 
     public function editar()

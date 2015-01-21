@@ -5,8 +5,6 @@
     error_reporting(E_ALL);
 
 
-    $config = include_once("../app/config/config.php");
-    require_once('../system/core/Configuration.php');
     require_once('../system/core/Aeskaeno.php');
     require_once('../system/core/Controller.php');
     require_once('../system/core/Model.php');
@@ -27,7 +25,6 @@
     }
 
     $bootstrap = new Aeskaeno();
-    print "<pre>";
-    print_r($bootstrap->parameters); exit;
+
     $bootstrap->start();
 

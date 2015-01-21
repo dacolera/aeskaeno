@@ -2,17 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: dacol
- * Date: 28/12/14
- * Time: 15:12
+ * Date: 18/01/15
+ * Time: 19:19
  */
 
-class Cargo extends Model{
+class Salario extends Model{
 
-    protected $_table = 'cargo';
+    protected $_table = 'salario';
 
     public function insert(Array $dados = null)
     {
         return $this->save($dados);
     }
-
 }

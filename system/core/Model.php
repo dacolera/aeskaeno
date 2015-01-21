@@ -7,9 +7,8 @@
  * Classe abstrata que serve de base para todas as Models da aplicacao
  */
 
-abstract class Model {
+abstract class Model extends Aeskaeno {
 
-    use Configuration;
     /**
      * @var PDO
      */
@@ -25,7 +24,8 @@ abstract class Model {
     public function __construct()
     {
         $config = $this->getConfig('config');
-        $this->db = new PDO("mysql:host={$config['hostname']};dbname={$config['dbname']}", $config['username'], $config['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $this->db = new PDO("mysql:host={$config['hostname']};dbname={$config['dbname']}", $config['username'], $config['password'],
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     }
 
     /**
@@ -36,8 +36,10 @@ abstract class Model {
     public function save($dados)
     {
         $this->filterSave($dados);
-        if(!isset($dados['id']) || !$dados['id'])
-            return $this->db->query("INSERT INTO {$this->_table} (".implode(', ',array_keys($dados)).") VALUES ('".implode("','",$dados)."')");
+        if(!isset($dados['id']) || !$dados['id']) {
+            $this->db->query("INSERT INTO {$this->_table} (" . implode(', ', array_keys($dados)) . ") VALUES ('" . implode("','", $dados) . "')");
+            return $this->db->lastInsertId();
+        }
         else
         {
             $id = $dados['id'];
@@ -76,6 +78,15 @@ abstract class Model {
     public function fetchAll()
     {
         return $this->db->query("SELECT * FROM {$this->_table}");
+    }
+
+    /**
+     * @return PDOStatement
+     * metodo primario para trazer um registro especifico da tabela pelo seu id
+     */
+    public function fetchRow($id)
+    {
+        return $this->db->query("SELECT * FROM {$this->_table} WHERE id = {$id}");
     }
 
     /**

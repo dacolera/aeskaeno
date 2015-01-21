@@ -27,11 +27,11 @@ class Aeskaeno {
     /**
      * @var array com os parametros de requisicao
      */
-    public $getParameters = array();
+    protected $getParameters = array();
 
-    public $postParameters = array();
+    protected $postParameters = array();
 
-    public $parameters = array();
+    protected $parameters = array();
 
     /**
      * metodo construtor
@@ -43,7 +43,7 @@ class Aeskaeno {
         $this->setController();
         $this->setAction();
         $this->setGetParams();
-        //$this->setPostParams();
+        $this->setPostParams();
     }
 
     /**
@@ -83,6 +83,7 @@ class Aeskaeno {
     {
         $last = array_search(end($this->_explode), $this->_explode);
         unset($this->_explode[0], $this->_explode[1], $this->_explode[2], $this->_explode[$last]);
+
         $this->paramFilter($this->_explode);
     }
 
@@ -133,24 +134,25 @@ class Aeskaeno {
      * @param array $source
      * Metodo interno que auxilia a extracao de chave valor para requests get e post
      */
-    protected function paramFilter(Array $source)
+    protected function paramFilter($source)
     {
         if(!empty($source)) {
-            if (is_numeric(array_keys($source))) {
+            if (array_keys($source)[0] == '3') {
                 foreach ($source as $chave => $valor) {
                     if ($chave % 2 != 0)
                         $keys[] = $valor;
                     else
                         $values[] = $valor;
                 }
-                if (count($keys) == count($values))
+                if (count($keys) == count($values)) {
                     $this->getParameters = array_combine($keys, $values);
-            } else
+                }
+            }
+            else
                 $this->postParameters = $source;
-
-            $this->parameters = array_merge($this->getParameters,$this->postParameters);
-            $this->getParameters = $this->postParameters = array();
         }
+        $this->parameters = array_merge($this->getParameters,$this->postParameters);
+        $this->getParameters = $this->postParameters = array();
     }
 
     /**
@@ -168,5 +170,10 @@ class Aeskaeno {
                 return $this->parameters[$input];
             else
                 return $return;
+    }
+
+    public function getConfig($file)
+    {
+        return include "../app/config/{$file}.php";
     }
 }
