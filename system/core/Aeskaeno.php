@@ -152,7 +152,6 @@ class Aeskaeno {
                 $this->postParameters = $source;
         }
         $this->parameters = array_merge($this->getParameters,$this->postParameters);
-        $this->getParameters = $this->postParameters = array();
     }
 
     /**
