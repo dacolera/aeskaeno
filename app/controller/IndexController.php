@@ -18,14 +18,15 @@ class Index extends Controller{
 
         $sessao = Register::getInstance();
 
+
+
         $sessao
-            ->setRegister('nome',$nome);
-        $sessao
+            ->setRegister('nome',$nome)
             ->setRegister('idade',$idade);
 
         //$sessao->clearRegister();
 
-        print_r($sessao->getRegister()); exit;
+        print $sessao->getRegister('nome'); exit;
 
 
 

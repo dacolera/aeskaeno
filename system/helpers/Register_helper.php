@@ -40,21 +40,28 @@ class Register {
     {
         if(null !== $key && null !== $value){
             $_SESSION[$key] = $value;
+            return self::$instance;
         }
         else{
             if(is_array($key)){
                 foreach($key as $intKey => $intValue){
                     $_SESSION[$intKey] = $intValue;
+                    return self::$instance;
                 }
             }
             return false;
         }
     }
 
-    public function getRegister($key = null)
+    public function getRegister($key = null, $return = null)
     {
         if(null === $key){
             return $this->registry;
+        }else{
+            if(array_key_exists($key, $this->registry)){
+                return $this->registry[$key];
+            }
+            return $return;
         }
     }
 
