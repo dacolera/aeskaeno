@@ -16,6 +16,18 @@ class Index extends Controller{
         $idade =  $this->getParams('idade');
         $nome =   $this->getParams('nome');
 
+        $sessao = Register::getInstance();
+
+        $sessao
+            ->setRegister('nome',$nome);
+        $sessao
+            ->setRegister('idade',$idade);
+
+        //$sessao->clearRegister();
+
+        print_r($sessao->getRegister()); exit;
+
+
 
 
         $funcionarios = new Funcionarios();
