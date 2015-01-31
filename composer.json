@@ -1,0 +1,9 @@
+{
+    "name": "Askaeno",
+    "description": "Framework para estudos de orientação a objetos",
+    "keywords": ["framework", "askaeno"],
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
