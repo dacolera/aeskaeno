@@ -1,19 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<button class="citricas">Citricas</button>
+<button class="fibrosas">Fibrosas</button>
+<button class="leitosas">Leitosas</button>
+<div class="container"></div>
 
-</head>
-<body>
-    <p>Esta é a view index do site !!</p>
-    <h1><?php echo $nome ?></h1>
-    <h1><?php echo $idade ?></h1>
-    <h1><?php echo $email?></h1>
-    <h1><?php echo $empresa?></h1>
-    <h1><?php echo $cidade?></h1>
-    <?php foreach($funcionarios as $funcionario):?>
-        <p><?php echo $funcionario['nome']?></p>
-    <?php endforeach?>
 
-</body>
-</html>
+<script type="text/javascript">
+
+    $(function(){
+        $('button').click(function(){
+            var grupo = $(this).attr('class');
+            $.ajax({
+                url : '/aeskaeno/public/index/listarAjax/tipo/'+grupo,
+                success : function(data){
+                    $('.container').empty().append('<h1>'+grupo.toUpperCase()+'</h1>').css('textAlign','center');
+                    for(fruta in data = eval(data)){
+                        $('.container').append('<p>'+data[fruta]+'</p>')
+                         .css({
+                                'color'         : 'blue',
+                                'width'         : '200px',
+                                'height'        : '100px',
+                                'position'      : 'fixed',
+                                'marginLeft'    : '-100px',
+                                'left'          : '50%'
+                         });
+                    }
+                }
+            });
+        });
+    });
+
+</script>

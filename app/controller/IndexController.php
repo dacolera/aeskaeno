@@ -16,20 +16,6 @@ class Index extends Controller{
         $idade =  $this->getParams('idade');
         $nome =   $this->getParams('nome');
 
-        $sessao = Register::getInstance();
-
-
-
-        $sessao
-            ->setRegister('nome',$nome)
-            ->setRegister('idade',$idade);
-
-        //$sessao->clearRegister();
-
-        print $sessao->getRegister('nome'); exit;
-
-
-
 
         $funcionarios = new Funcionarios();
         $lista = $funcionarios->listarFuncionarios();
@@ -44,9 +30,26 @@ class Index extends Controller{
             'idade'  => $idade,
             'funcionarios' => $lista
         );
-
         $this->view(null,$dados);
 
+    }
+
+    public function listarAjax(){
+
+        $grupo = $this->getParams('tipo');
+        $frutas = array(
+            'citricas' => array(
+              'laranja', 'acerola','limao','abacaxi'
+            ),
+            'fibrosas' => array(
+                'banana','melancia','morango','amora'
+            ),
+            'leitosas' => array(
+                'manga','mamao','caju','goiaba'
+            )
+        );
+
+        echo json_encode($frutas[$grupo]);
     }
 
     public function listar(){
