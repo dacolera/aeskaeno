@@ -17,7 +17,6 @@ class Index extends Controller{
         $nome =   $this->getParams('nome');
 
 
-
         $funcionarios = new Funcionarios();
         $lista = $funcionarios->listarFuncionarios();
 
@@ -31,9 +30,26 @@ class Index extends Controller{
             'idade'  => $idade,
             'funcionarios' => $lista
         );
-
         $this->view(null,$dados);
 
+    }
+
+    public function listarAjax(){
+
+        $grupo = $this->getParams('tipo');
+        $frutas = array(
+            'citricas' => array(
+              'laranja', 'acerola','limao','abacaxi'
+            ),
+            'fibrosas' => array(
+                'banana','melancia','morango','amora'
+            ),
+            'leitosas' => array(
+                'manga','mamao','caju','goiaba'
+            )
+        );
+
+        echo json_encode($frutas[$grupo]);
     }
 
     public function listar(){

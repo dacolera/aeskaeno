@@ -10,6 +10,7 @@
     require_once('../system/core/Model.php');
 
 
+
     function __autoload($class)
     {
        if(file_exists('../app/model/'.$class.'.php'))
