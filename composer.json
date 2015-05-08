@@ -5,5 +5,10 @@
     "type": "project",
     "require-dev": {
         "phpunit/phpunit": "*"
+    },
+    "autoload" : {
+    	"psr-4" : {
+    		"aeskaeno\\" : "aeskaeno"
+    	}
     }
 }
