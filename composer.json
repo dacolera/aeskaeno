@@ -4,7 +4,8 @@
     "keywords": ["framework", "askaeno"],
     "type": "project",
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+	"zendframework/zend-servicemanager": "*"
     },
     "autoload" : {
     	"psr-4" : {
