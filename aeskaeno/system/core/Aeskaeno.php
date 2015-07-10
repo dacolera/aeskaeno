@@ -175,7 +175,7 @@ class Aeskaeno {
 
     public function getConfig($file)
     {
-        return include "../aeskaeno/app/config/{$file}.php";
+        return include dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "aeskaeno/app/config/{$file}.php";
     }
 
     public function getController() {

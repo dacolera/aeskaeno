@@ -7,9 +7,12 @@
 
    require "../vendor/autoload.php";
 
-   use aeskaeno\system\core\Aeskaeno;
+    use Zend\ServiceManager\ServiceManager;
 
-    $bootstrap = new Aeskaeno();
+    $serviceManager = new ServiceManager();
+    $serviceManager->setFactory('bootstrap', '\aeskaeno\system\factories\CoreFactory');
+
+    $bootstrap = $serviceManager->get('bootstrap');
 
     $bootstrap->start();
 

@@ -19,7 +19,6 @@ class IndexController extends Controller{
      */
     public function index_action(){
 
-
         $idade =  $this->getParams('idade');
         $nome =   $this->getParams('nome');
 
