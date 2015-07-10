@@ -20,7 +20,6 @@ use Zend\ServiceManager\ServiceManager;
 
      public final function  __construct() {
         $this->serviceManager = new ServiceManager();
-        $this->request = new Request();
         $this->init();
      }
 
@@ -28,20 +27,20 @@ use Zend\ServiceManager\ServiceManager;
      {
          if(null === $view)
          {
-             $view = $this->request->getAction();
+             $view = $this->getRequest()->getAction();
          }
          extract($dados,EXTR_OVERWRITE);
 
-         if(file_exists('../aeskaeno/app/view/'.strtolower($this->request->getController()).'/'.$view.'.phtml')){
+         if(file_exists('../aeskaeno/app/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml')){
              $return = '';
              if($this->layout){
                  $return .= include_once('../aeskaeno/app/view/layout/header.phtml');
 
-                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->request->getController()).'/'.$view.'.phtml');
+                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
 
                  $return .= include_once('../aeskaeno/app/view/layout/footer.phtml');
              } else {
-                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->request->getController()).'/'.$view.'.phtml');
+                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
              }
 
              return $return;
@@ -66,6 +65,11 @@ use Zend\ServiceManager\ServiceManager;
      protected function init() {}
 
      public function getParams($params = null, $return = null) {
-         return $this->request->getParams($params, $return);
+         return $this->getRequest()->getParams($params, $return);
+     }
+
+     public function getRequest() {
+         $this->request = new Request();
+         return $this->request;
      }
 }
