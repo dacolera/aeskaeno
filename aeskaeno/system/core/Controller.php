@@ -16,11 +16,11 @@ use Zend\ServiceManager\ServiceManager;
 
      protected $layout = true;
      protected $serviceManager;
-     protected $core;
+     protected $request;
 
      public final function  __construct() {
         $this->serviceManager = new ServiceManager();
-        $this->core = new Aeskaeno();
+        $this->request = new Request();
         $this->init();
      }
 
@@ -28,19 +28,22 @@ use Zend\ServiceManager\ServiceManager;
      {
          if(null === $view)
          {
-             $view = $this->core->getAction();
+             $view = $this->request->getAction();
          }
          extract($dados,EXTR_OVERWRITE);
 
-         if(file_exists('../aeskaeno/app/view/'.strtolower($this->core->getController()).'/'.$view.'.phtml')){
+         if(file_exists('../aeskaeno/app/view/'.strtolower($this->request->getController()).'/'.$view.'.phtml')){
              $return = '';
              if($this->layout){
                  $return .= include_once('../aeskaeno/app/view/layout/header.phtml');
 
-                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->core->getController()).'/'.$view.'.phtml');
+                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->request->getController()).'/'.$view.'.phtml');
 
                  $return .= include_once('../aeskaeno/app/view/layout/footer.phtml');
+             } else {
+                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->request->getController()).'/'.$view.'.phtml');
              }
+
              return $return;
          }
          die("View solicitada não existe.");
@@ -63,6 +66,6 @@ use Zend\ServiceManager\ServiceManager;
      protected function init() {}
 
      public function getParams($params = null, $return = null) {
-         return $this->core->getParams($params, $return);
+         return $this->request->getParams($params, $return);
      }
 }
