@@ -6,6 +6,8 @@ use aeskaeno\system\core\Controller;
 use aeskaeno\app\model\Funcionarios;
 use aeskaeno\app\model\Cargo;
 use aeskaeno\app\model\Salario;
+use aeskaeno\system\helpers\Register;
+
 /**
  * Created by PhpStorm.
  * User: dacol
@@ -19,24 +21,20 @@ class IndexController extends Controller{
      */
     public function index_action(){
 
-        $idade =  $this->getRequest()->getParams('idade');
-        $nome =   $this->getRequest()->getParams('nome');
+        $session = Register::getInstance();
 
-
-        $funcionarios = new Funcionarios();
-        $lista = $funcionarios->listarFuncionarios();
-
-
-
-        $dados = array(
-            'nome'  => $nome,
-            'email' => 'dacolera360@gmail.com',
-            'empresa' => 'catho',
-            'cidade' => 'barueri',
-            'idade'  => $idade,
-            'funcionarios' => $lista
+        $session->setRegister(
+            array(
+                'nome' => 'jurandir dacol junior',
+                'idade' => 36,
+                'sexo' => 'masculino',
+                'profissao' => 'programador'
+            )
         );
-        $this->view(null,$dados);
+
+
+
+        $this->view(null,$session->getRegister());
 
     }
 
