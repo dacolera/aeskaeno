@@ -1,10 +1,10 @@
 <?php
 
-namespace aeskaeno\system\factories;
+namespace Aeskaeno\System\Factories;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use aeskaeno\system\core\Aeskaeno;
+use Aeskaeno\System\Core\Aeskaeno;
 
 class CoreFactory implements FactoryInterface
 {

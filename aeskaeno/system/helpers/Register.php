@@ -1,6 +1,6 @@
 <?php
 
-namespace aeskaeno\system\helpers;
+namespace Aeskaeno\System\Helpers;
 /**
  * Created by PhpStorm.
  * User: dacol

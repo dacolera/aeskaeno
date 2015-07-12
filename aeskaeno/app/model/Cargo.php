@@ -1,8 +1,8 @@
 <?php
 
-namespace aeskaeno\app\model;
+namespace Aeskaeno\App\Model;
 
-use aeskaeno\system\core\Model;
+use Aeskaeno\System\Core\Model;
 /**
  * Created by PhpStorm.
  * User: dacol

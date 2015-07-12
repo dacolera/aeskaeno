@@ -1,12 +1,12 @@
 <?php
 
-namespace aeskaeno\app\controller;
+namespace Aeskaeno\App\Controller;
 
-use aeskaeno\system\core\Controller;
-use aeskaeno\app\model\Funcionarios;
-use aeskaeno\app\model\Cargo;
-use aeskaeno\app\model\Salario;
-use aeskaeno\system\helpers\Register;
+use Aeskaeno\System\Core\Controller;
+use Aeskaeno\App\Model\Funcionarios;
+use Aeskaeno\App\Model\Cargo;
+use Aeskaeno\App\Model\Salario;
+use Aeskaeno\System\Helpers\Register;
 
 /**
  * Created by PhpStorm.

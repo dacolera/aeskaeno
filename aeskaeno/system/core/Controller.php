@@ -1,6 +1,6 @@
 <?php
 
-namespace aeskaeno\system\core;
+namespace Aeskaeno\System\Core;
 
 
 use Zend\ServiceManager\ServiceManager;
@@ -31,16 +31,16 @@ use Zend\ServiceManager\ServiceManager;
          }
          extract($dados,EXTR_OVERWRITE);
 
-         if(file_exists('../aeskaeno/app/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml')){
+         if(file_exists('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml')){
              $return = '';
              if($this->layout){
-                 $return .= include_once('../aeskaeno/app/view/layout/header.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/layout/header.phtml');
 
-                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
 
-                 $return .= include_once('../aeskaeno/app/view/layout/footer.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/layout/footer.phtml');
              } else {
-                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
              }
 
              return $return;

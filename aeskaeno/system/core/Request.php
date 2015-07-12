@@ -6,7 +6,7 @@
  * Time: 11:40
  */
 
-namespace aeskaeno\system\core;
+namespace Aeskaeno\System\Core;
 
 
 class Request {

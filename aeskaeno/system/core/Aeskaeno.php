@@ -1,6 +1,6 @@
 <?php
 
-namespace aeskaeno\system\core;
+namespace Aeskaeno\System\Core;
 /**
  * Created by PhpStorm.
  * User: dacol
@@ -26,7 +26,7 @@ class Aeskaeno {
      */
     public function start()
     {
-        $fullQualifiedClassName = "aeskaeno\\app\\controller\\" . ucfirst($this->request->getController()) . "Controller";
+        $fullQualifiedClassName = "Aeskaeno\\app\\controller\\" . ucfirst($this->request->getController()) . "Controller";
         $controler = new $fullQualifiedClassName();
         $controler->{$this->request->getAction(true)}();
     }

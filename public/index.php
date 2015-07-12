@@ -10,7 +10,7 @@
     use Zend\ServiceManager\ServiceManager;
 
     $serviceManager = new ServiceManager();
-    $serviceManager->setFactory('bootstrap', '\aeskaeno\system\factories\CoreFactory');
+    $serviceManager->setFactory('bootstrap', '\Aeskaeno\System\Factories\CoreFactory');
 
     $bootstrap = $serviceManager->get('bootstrap');
 
