@@ -16,7 +16,7 @@ use Zend\ServiceManager\ServiceManager;
 
      protected $layout = true;
      protected $serviceManager;
-     protected $request;
+     protected $request = null;
 
      public final function  __construct() {
         $this->serviceManager = new ServiceManager();
@@ -69,7 +69,8 @@ use Zend\ServiceManager\ServiceManager;
      }
 
      public function getRequest() {
-         $this->request = new Request();
+         if(null === $this->request)
+             $this->request = new Request();
          return $this->request;
      }
 }

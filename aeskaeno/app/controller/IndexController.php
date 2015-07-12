@@ -32,8 +32,6 @@ class IndexController extends Controller{
             )
         );
 
-
-
         $this->view(null,$session->getRegister());
 
     }
