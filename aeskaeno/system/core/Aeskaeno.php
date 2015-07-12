@@ -26,7 +26,7 @@ class Aeskaeno {
      */
     public function start()
     {
-        $fullQualifiedClassName = "Aeskaeno\\app\\controller\\" . ucfirst($this->request->getController()) . "Controller";
+        $fullQualifiedClassName = "Aeskaeno\\App\\Controller\\" . ucfirst($this->request->getController()) . "Controller";
         $controler = new $fullQualifiedClassName();
         $controler->{$this->request->getAction(true)}();
     }
