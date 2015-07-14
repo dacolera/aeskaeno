@@ -1,8 +1,10 @@
 <?php
 
-namespace aeskaeno\system\core;
+namespace Aeskaeno\System\Core;
 
-use aeskaeno\system\core\Aeskaeno;
+
+use Zend\ServiceManager\ServiceManager;
+
 /**
  * Created by PhpStorm.
  * User: dacol
@@ -10,27 +12,37 @@ use aeskaeno\system\core\Aeskaeno;
  * Time: 19:18
  */
 
-  class Controller extends Aeskaeno {
+  class Controller  {
 
      protected $layout = true;
+     protected $serviceManager;
+     protected $request = null;
+
+     public final function  __construct() {
+        $this->serviceManager = new ServiceManager();
+        $this->init();
+     }
 
      public function view($view = null,Array $dados = array())
      {
          if(null === $view)
          {
-             $view = $this->getAction();
+             $view = $this->getRequest()->getAction();
          }
          extract($dados,EXTR_OVERWRITE);
-         
-         if(file_exists('../aeskaeno/app/view/'.strtolower($this->getController()).'/'.$view.'.phtml')){
+
+         if(file_exists('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml')){
              $return = '';
              if($this->layout){
-                 $return .= include_once('../aeskaeno/app/view/layout/header.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/layout/header.phtml');
 
-                 $return .= include_once('../aeskaeno/app/view/'.strtolower($this->getController()).'/'.$view.'.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
 
-                 $return .= include_once('../aeskaeno/app/view/layout/footer.phtml');
+                 $return .= include_once('../Aeskaeno/App/view/layout/footer.phtml');
+             } else {
+                 $return .= include_once('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml');
              }
+
              return $return;
          }
          die("View solicitada não existe.");
@@ -44,5 +56,21 @@ use aeskaeno\system\core\Aeskaeno;
      public function enableLayout()
      {
          $this->layout = true;
+     }
+
+     public function getServiceLocator() {
+         return $this->serviceManager;
+     }
+
+     protected function init() {}
+
+     public function getParams($params = null, $return = null) {
+         return $this->getRequest()->getParams($params, $return);
+     }
+
+     public function getRequest() {
+         if(null === $this->request)
+             $this->request = new Request();
+         return $this->request;
      }
 }

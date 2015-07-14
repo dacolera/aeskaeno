@@ -1,6 +1,6 @@
 <?php
 
-namespace aeskaeno\system\core;
+namespace Aeskaeno\System\Helpers;
 /**
  * Created by PhpStorm.
  * User: dacol
@@ -10,7 +10,7 @@ namespace aeskaeno\system\core;
 
 class Register {
 
-    //singleton patern
+    //singleton pattern
 
     private static $instance = null;
     private $registry = array();
@@ -25,7 +25,7 @@ class Register {
      */
     private function __construct(){
         session_start();
-        $this->registry = $_SESSION;
+        $this->registry = &$_SESSION;
     }
 
     /**
@@ -44,15 +44,13 @@ class Register {
             $_SESSION[$key] = $value;
             return self::$instance;
         }
-        else{
-            if(is_array($key)){
-                foreach($key as $intKey => $intValue){
-                    $_SESSION[$intKey] = $intValue;
-                    return self::$instance;
-                }
+        elseif(is_array($key)){
+            foreach($key as $intKey => $intValue){
+                $_SESSION[$intKey] = $intValue;
             }
-            return false;
+            return self::$instance;
         }
+        return false;
     }
 
     public function getRegister($key = null, $return = null)
@@ -83,7 +81,4 @@ class Register {
         }
         return self::$instance;
     }
-
-
-
 }
