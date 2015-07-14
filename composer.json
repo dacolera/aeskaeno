@@ -5,7 +5,7 @@
     "type": "project",
     "require-dev": {
         "phpunit/phpunit": "*",
-	"zendframework/zend-servicemanager": "*"
+	    "zendframework/zend-servicemanager": "*"
     },
     "autoload" : {
     	"psr-4" : {
