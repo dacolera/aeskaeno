@@ -1,0 +1,30 @@
+{
+  "name": "Aeskaeno",
+  "version": "1.0.0",
+  "homepage": "https://github.com/dacolera/aeskaeno",
+  "authors": [
+    "dacolera <dacolera360@gmail.com>"
+  ],
+  "description": "framework simplificado para fins educacionais",
+  "main": "assets/scripts/main.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "aeskaeno",
+    "framework",
+    "back-end",
+    "front-end"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
