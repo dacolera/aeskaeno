@@ -1,0 +1,21 @@
+<p>Esta é a view listar do site !!</p>
+<p><a href="/aeskaeno/public/index/cadastrar">Cadastrar</a></p>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>CARGO</th>
+            <th>SALÁRIO</th>
+        </thead>
+        <tbody>
+            <?php foreach($dados as $registro): ?>
+                <tr>
+                    <td><?php echo $registro['id'] ?></td>
+                    <td><?php echo $registro['nome'] ?></td>
+                    <td><?php echo $registro['cargo'] ?></td>
+                    <td><?php echo $registro['salario'] ?></td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+
+    </table>
