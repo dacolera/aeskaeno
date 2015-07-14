@@ -1,8 +1,7 @@
 <?php
 
-namespace aeskaeno\system\core;
+namespace Aeskaeno\System\Core;
 
-use aeskaeno\system\core\Aeskaeno;
 /**
  * Created by PhpStorm.
  * User: dacol

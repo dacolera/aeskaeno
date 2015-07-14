@@ -1,8 +1,8 @@
 <?php
 
-namespace aeskaeno\app\controller;
+namespace Aeskaeno\App\Controller;
 
-use aeskaeno\system\core\Controller;
+use Aeskaeno\System\Core\Controller;
 /**
  * Created by PhpStorm.
  * User: dacol

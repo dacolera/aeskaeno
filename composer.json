@@ -9,7 +9,7 @@
     },
     "autoload" : {
     	"psr-4" : {
-    		"aeskaeno\\" : "aeskaeno"
+    		"Aeskaeno\\" : "aeskaeno"
     	}
     }
 }

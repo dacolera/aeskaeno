@@ -1,11 +1,13 @@
 <?php
 
-namespace aeskaeno\app\controller;
+namespace Aeskaeno\App\Controller;
 
-use aeskaeno\system\core\Controller;
-use aeskaeno\app\model\Funcionarios;
-use aeskaeno\app\model\Cargo;
-use aeskaeno\app\model\Salario;
+use Aeskaeno\System\Core\Controller;
+use Aeskaeno\App\Model\Funcionarios;
+use Aeskaeno\App\Model\Cargo;
+use Aeskaeno\App\Model\Salario;
+use Aeskaeno\System\Helpers\Register;
+
 /**
  * Created by PhpStorm.
  * User: dacol
@@ -19,31 +21,24 @@ class IndexController extends Controller{
      */
     public function index_action(){
 
+        $session = Register::getInstance();
 
-        $idade =  $this->getParams('idade');
-        $nome =   $this->getParams('nome');
-
-
-        $funcionarios = new Funcionarios();
-        $lista = $funcionarios->listarFuncionarios();
-
-
-
-        $dados = array(
-            'nome'  => $nome,
-            'email' => 'dacolera360@gmail.com',
-            'empresa' => 'catho',
-            'cidade' => 'barueri',
-            'idade'  => $idade,
-            'funcionarios' => $lista
+        $session->setRegister(
+            array(
+                'nome' => 'jurandir dacol junior',
+                'idade' => 36,
+                'sexo' => 'masculino',
+                'profissao' => 'programador'
+            )
         );
-        $this->view(null,$dados);
+
+        $this->view(null,$session->getRegister());
 
     }
 
     public function listarAjax(){
 
-        $grupo = $this->getParams('tipo');
+        $grupo = $this->getRequest()->getParams('tipo');
         $frutas = array(
             'citricas' => array(
               'laranja', 'acerola','limao','abacaxi'
@@ -67,25 +62,25 @@ class IndexController extends Controller{
 
     public function cadastrar()
     {
-        if($this->isPost()){
+        if($this->getRequest()->isPost()){
             $func = new Funcionarios();
             $cargo = new Cargo();
             $sal = new Salario();
 
             // gravando o funcionario no banco
-            $id = $func->insert(array('nome' => $this->getParams('nome')));
+            $id = $func->insert(array('nome' => $this->getRequest()->getParams('nome')));
             if($id)
             {
                 $cargo->insert(
                     array(
-                        'cargo' => $this->getParams('cargo'),
+                        'cargo' => $this->getRequest()->getParams('cargo'),
                         'func_id' => $id
                     )
                 );
 
                 $sal->insert(
                     array(
-                        'salario' => $this->getParams('salario'),
+                        'salario' => $this->getRequest()->getParams('salario'),
                         'func_id' => $id
                     )
                 );
