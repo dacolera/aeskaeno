@@ -29,6 +29,8 @@ use Zend\ServiceManager\ServiceManager;
          {
              $view = $this->getRequest()->getAction();
          }
+
+         $dados['baseUrl'] = $this->baseUrl();
          extract($dados,EXTR_OVERWRITE);
 
          if(file_exists('../Aeskaeno/App/view/'.strtolower($this->getRequest()->getController()).'/'.$view.'.phtml')){
@@ -72,5 +74,9 @@ use Zend\ServiceManager\ServiceManager;
          if(null === $this->request)
              $this->request = new Request();
          return $this->request;
+     }
+
+     public function baseUrl() {
+         return "http://localhost/public/";
      }
 }
