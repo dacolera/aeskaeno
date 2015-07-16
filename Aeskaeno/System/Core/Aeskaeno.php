@@ -33,7 +33,8 @@ class Aeskaeno {
 
     public function getConfig($file)
     {
-        return include dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "aeskaeno/app/config/{$file}.php";
+        //echo dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "Aeskaeno/app/config/{$file}.php"; exit;
+        return include dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "Aeskaeno/App/config/{$file}.php";
     }
 
 

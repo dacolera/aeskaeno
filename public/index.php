@@ -11,6 +11,7 @@
 
     $serviceManager = new ServiceManager();
     $serviceManager->setFactory('bootstrap', '\Aeskaeno\System\Factories\CoreFactory');
+    
 
     $bootstrap = $serviceManager->get('bootstrap');
 
