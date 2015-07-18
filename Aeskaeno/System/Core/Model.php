@@ -27,8 +27,12 @@ abstract class Model extends Aeskaeno {
     public function __construct()
     {
         $config = $this->getConfig('config');
-        //var_dump($config); exit;
-        $this->db = new \PDO("mysql:host={$config['hostname']};dbname={$config['dbname']}", $config['username'], $config['password']);
+      
+        $this->db = new \PDO("mysql:host={$config['hostname']};dbname={$config['dbname']}", $config['username'], $config['password'],
+            array(
+	        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+	    )
+	);
     }
 
     /**
